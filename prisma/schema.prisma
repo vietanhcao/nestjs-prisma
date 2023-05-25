@@ -14,12 +14,17 @@ model User {
   id             Int      @id @default(autoincrement())
   email          String   @unique
   hashedPassword String
-  firstName      String
-  lastName       String
+  firstName      String?
+  lastName       String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  // relationships
+  notes          Note[]
+
+  @@map("users") //users id "table name" in postgres
 }
 
+// One user can have many notes
 model Note {
   id          Int      @id @default(autoincrement())
   title       String
@@ -29,4 +34,8 @@ model Note {
   updatedAt   DateTime @updatedAt
   // author    User     @relation(fields: [authorId], references: [id])
   // authorId  Int
+  userId      Int // like a foreign key
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("notes ") //users id "table name" in postgres
 }
