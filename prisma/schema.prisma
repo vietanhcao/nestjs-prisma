@@ -21,7 +21,7 @@ model User {
   // relationships
   notes          Note[]
 
-  @@map("users") //users id "table name" in postgres
+  @@map("users")
 }
 
 // One user can have many notes
@@ -37,5 +37,5 @@ model Note {
   userId      Int // like a foreign key
   user        User     @relation(fields: [userId], references: [id])
 
-  @@map("notes ") //users id "table name" in postgres
+  @@map("notes ")
 }
